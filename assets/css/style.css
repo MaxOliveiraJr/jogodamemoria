@@ -19,8 +19,8 @@ body {
 
 .card {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   transform-style: preserve-3d;
   transition: transform 0.5s;
 }
@@ -69,6 +69,7 @@ body {
 }
 
 #restart {
+  font-family: "Righteous", cursive;
   padding: 20px;
   font-size: 20px;
   background-color: #ffff00;
@@ -82,3 +83,4 @@ body {
   grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
   gap: 20px;
 }
+
