@@ -5,13 +5,13 @@ const ICON = 'icon';
 
 startGame();
 
-function startGame(){
+function startGame() {
 
     initializeCards(game.createCardFromTechs());
 }
 
-function initializeCards(cards){
-    let gameBoard = document.getElementById('gameBoard'); 
+function initializeCards(cards) {
+    let gameBoard = document.getElementById('gameBoard');
 
     game.cards.forEach(card => {
         let cardElement = document.createElement('div');
@@ -26,23 +26,23 @@ function initializeCards(cards){
     });
 }
 
-function createCardContent(card,cardElement){
-    createdFace(FRONT,card,cardElement);
-    createdFace(BACK,card,cardElement);
+function createCardContent(card, cardElement) {
+    createdFace(FRONT, card, cardElement);
+    createdFace(BACK, card, cardElement);
 }
 
-function createdFace(face, card, element){
+function createdFace(face, card, element) {
     let cardElementFace = document.createElement('div');
     cardElementFace.classList.add(face);
 
-    if(face == FRONT){
+    if (face == FRONT) {
         let iconElement = document.createElement('img');
 
         iconElement.classList.add(ICON);
-        iconElement.src = './assets/images/'+card.icon+'.png';
+        iconElement.src = './assets/images/' + card.icon + '.png';
         cardElementFace.appendChild(iconElement);
-        
-    }else{
+
+    } else {
 
         cardElementFace.innerHTML = '&lt/&gt';
     }
@@ -50,6 +50,33 @@ function createdFace(face, card, element){
     element.appendChild(cardElementFace);
 }
 
-function flipCard(){
-    this.classList.add('flip')
+function flipCard() {
+
+    if (game.setCard(this.id)) {
+
+        this.classList.add('flip');
+
+        if (game.secondCard) {
+
+            if (game.checkMath()) {
+
+                game.clearCards();
+
+            } else {
+                let firstCardView = document.getElementById(game.firstCard.id)
+                let secondCardView = document.getElementById(game.secondCard.id)
+
+                setTimeout(() => {
+                    firstCardView.classList.remove('flip')
+                    secondCardView.classList.remove('flip')
+                    game.unflipCards();
+                }, 1000)
+
+            };
+        }
+    };
+
+
+
+
 }

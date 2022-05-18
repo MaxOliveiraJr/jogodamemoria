@@ -1,12 +1,46 @@
 let game = {
 
-    lockMode:false,
-    firstCard:null,
-    secondCard:null,
+    lockMode: false,
+    firstCard: null,
+    secondCard: null,
 
-    setCard: function (id){
-        this.cards.filter(id)
+    setCard: function (id) {
+
+        let card = this.cards.filter(card => card.id === id)[0]
+
+        if (card.flipped || this.lockMode) {
+            return false;
+        }
+
+        if (!this.firstCard) {
+            this.firstCard = card;
+            this.firstCard.flipped = true;
+            return true;
+        } else {
+            this.secondCard = card;
+            this.lockMode = true;
+            this.secondCard.flipped = true;
+            return true;
+        }
     },
+
+    checkMath: function () {
+        return this.firstCard.icon === this.secondCard.icon
+    },
+
+    clearCards: function () {
+        this.firstCard = null;
+        this.secondCard = null;
+        this.lockMode = null;
+    },
+
+    unflipCards: function () {
+
+        this.firstCard.flipped = false
+        this.secondCard.flipped = false
+        game.clearCards()
+    },
+
     techs: [
         'bootstrap',
         'css',
@@ -31,7 +65,6 @@ let game = {
 
         this.cards = this.cards.flatMap(pair => pair)
         this.shuffleCards();
-        
     },
 
     createPairFromTech: function (tech) {
