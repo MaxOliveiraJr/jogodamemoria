@@ -41,6 +41,10 @@ let game = {
         game.clearCards()
     },
 
+    checkGameOver: function() {
+        return this.cards.filter(card=>!card.flipped).length == 0;
+    },
+
     techs: [
         'bootstrap',
         'css',
