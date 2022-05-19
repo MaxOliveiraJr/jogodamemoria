@@ -104,4 +104,16 @@ body {
   img{
     width: 50px;
   }
+
+  #gameOver{
+    font-size: 23px;
+  }
+
+  #restart {
+    padding: 12px;
+    font-size: 14px;
+    background-color: #ffff00;
+    margin-top: 23px;
+  }
+  
 }
